@@ -84,3 +84,8 @@ def json_response(f, *args, **kwargs):
 
     result['Content-Type'] = 'application/json'
     return result
+
+
+def allow_get(f):
+    f.allow_get = True
+    return f
