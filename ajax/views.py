@@ -1,6 +1,10 @@
+try:
+    import json
+except ImportError:
+    from django.utils import simplejson as json
+
 from django.conf import settings
 from django.http import HttpResponse
-from django.utils import simplejson as json
 from django.utils.translation import ugettext as _
 from django.utils.importlib import import_module
 from django.utils.log import getLogger
@@ -54,7 +58,7 @@ def endpoint_loader(request, application, model, **kwargs):
                 raise AJAXError(404, _('Invalid method.'))
         except NotRegistered:
             raise AJAXError(500, _('Invalid model.'))
-    
+
     if request.method != "POST" and not hasattr(endpoint, 'allow_get'):
         raise AJAXError(400, _('Invalid HTTP method used.'))
 
